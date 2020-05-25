@@ -1,0 +1,9 @@
+all:
+  hosts:
+    ansible_user: yagza
+    doc1:
+      ansible_host: 192.168.250.10
+    doc2:
+      ansible_host: 192.168.250.20
+    doc3:
+      ansible_host: 192.168.250.30

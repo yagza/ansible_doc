@@ -1,7 +1,7 @@
 ---
 
-- hosts: 192.168.1.40
-
+- name: Start all vms
+  hosts: all
   tasks:
 
   - name: Start vm 1

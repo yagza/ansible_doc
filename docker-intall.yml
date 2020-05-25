@@ -32,7 +32,7 @@
         state: start
         enabled: yes
 
-    - name: start chrony
+    - name: start docker
       service: 
         name: docker
         state: start

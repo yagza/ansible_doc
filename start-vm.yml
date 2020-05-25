@@ -1,0 +1,25 @@
+---
+
+- hosts: 192.168.1.40
+
+  tasks:
+
+  - name: Start vm 1
+    virt:
+      name: doc1
+      state: running
+
+  - name: Start vm 2
+    virt:
+      name: doc2
+      state: running
+
+  - name: Start vm 3
+    virt:
+      name: doc3
+      state: running
+
+  - name: get status of vms
+    virt:
+      command: list_vms
+

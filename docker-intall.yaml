@@ -5,7 +5,7 @@
 
     - name: put docker network config files
       template:
-        src: $HOME/work/ansible/daemon.json.js
+        src: $HOME/work/ansible/daemon.json.j2
         dest: /etc/docker/daemon.json
         owner: root
         group: root

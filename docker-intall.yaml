@@ -1,0 +1,39 @@
+---
+- become: true
+
+  tasks:
+
+    - name: put docker network config files
+      template:
+        src: $HOME/work/ansible/daemon.json.js
+        dest: /etc/docker/daemon.json
+        owner: root
+        group: root
+        mode: '0644'
+        backup: yes
+
+    - name: install curl and stuff
+      package:
+        name: curl wget chrony
+        state: present
+        update_cache: yes
+
+    - name: install docker
+      shell: curl -sSL https://get.docker.com/ | sh
+
+    - name: make docker rootless
+      user: 
+        name: yagza
+        groups: docker
+
+    - name: start chrony
+      service: 
+        name: chronyd
+        state: start
+        enabled: yes
+
+    - name: start chrony
+      service: 
+        name: docker
+        state: start
+        enabled: yes

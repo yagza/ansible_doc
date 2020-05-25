@@ -21,7 +21,7 @@
 
     - name: install curl and stuff
       package:
-        name: curl,wget,chrony
+        name: curl,wget,chrony,epel-release
         state: present
         update_cache: yes
 

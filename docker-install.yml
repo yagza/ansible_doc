@@ -4,9 +4,15 @@
 
   tasks:
 
+    - name: create docker cfg directory
+      file:
+        path: /etc/docker
+        state: directory
+        mode: '0755'
+    
     - name: put docker network config files
       template:
-        src: $HOME/work/ansible/daemon.json.j2
+        src: daemon.json.j2
         dest: /etc/docker/daemon.json
         owner: root
         group: root
@@ -15,26 +21,33 @@
 
     - name: install curl and stuff
       package:
-        name: curl wget chrony
+        name: curl,wget,chrony
         state: present
         update_cache: yes
 
     - name: install docker
       shell: curl -sSL https://get.docker.com/ | sh
 
+    - name: install compose
+      package:
+        name: docker-compose
+        state: present
+        update_cache: yes
+
     - name: make docker rootless
       user: 
         name: yagza
         groups: docker
+        append: 'yes'
 
     - name: start chrony
       service: 
         name: chronyd
-        state: start
+        state: started
         enabled: yes
 
     - name: start docker
       service: 
         name: docker
-        state: start
+        state: started
         enabled: yes

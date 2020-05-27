@@ -19,9 +19,20 @@
         mode: '0644'
         backup: yes
 
+    - name: Set timezone to NSK
+      timezone:
+        name: Asia/Novosibirsk
+
+    - name: Allow specified groups to sudo
+      template: 
+        src: sudoers.j2
+        dest: /etc/sudoers.d/yagza
+        validate: 'visudo -cf %s'
+        mode: 0440
+
     - name: install curl and stuff
       package:
-        name: curl,wget,chrony,epel-release
+        name: curl,wget,chrony,epel-release,bash-completion-extras
         state: present
         update_cache: yes
 
@@ -43,7 +54,7 @@
     - name: start chrony
       service: 
         name: chronyd
-        state: started
+        state: restarted
         enabled: yes
 
     - name: start docker
@@ -51,3 +62,4 @@
         name: docker
         state: started
         enabled: yes
+

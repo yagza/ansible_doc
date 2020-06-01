@@ -32,7 +32,7 @@
 
     - name: install curl and stuff
       package:
-        name: curl,wget,chrony,epel-release,bash-completion-extras
+        name: curl,wget,chrony,epel-release,bash-completion-extras,git
         state: present
         update_cache: yes
 
@@ -62,4 +62,16 @@
         name: docker
         state: started
         enabled: yes
+
+    - name: stop firewall
+      service:
+        name: firewalld
+        state: stopped
+        enabled: no
+
+    - name: clone Brat Fisher udemy resources
+      git:
+        repo: https://github.com/BretFisher/udemy-docker-mastery.git
+        dest: udemy-docker-mastery
+
 

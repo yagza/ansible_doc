@@ -69,7 +69,7 @@
         state: stopped
         enabled: no
 
-    - name: clone Brat Fisher udemy resources
+    - name: clone Bret Fisher udemy resources
       git:
         repo: https://github.com/BretFisher/udemy-docker-mastery.git
         dest: udemy-docker-mastery
